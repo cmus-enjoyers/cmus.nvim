@@ -5,6 +5,4 @@ if not hasTelescope then
 	return
 end
 
-vim.notify("bogdan suka", vim.log.levels.WARN)
-
-return
+return require("cmus.plugin")
