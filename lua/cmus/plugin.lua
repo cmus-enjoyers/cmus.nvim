@@ -10,14 +10,14 @@ local defaultOpts = {}
 
 --- @param filePath string - path to file that will be played using cmus-remote
 function M.play(filePath)
-	local succes = os.execute("/usr/bin/cmus-remote -f ~/music/" .. filePath)
+	local succes = os.execute("/usr/bin/cmus-remote -f " .. filePath)
 
 	if not succes then
 		vim.notify("Cannot play " .. filePath, vim.log.levels.ERROR)
 		return false
 	end
 
-	vim.notify("Playing " .. filePath, vim.log.levels.INFO)
+	-- vim.notify("Playing " .. filePath, vim.log.levels.INFO)
 
 	return true
 end
@@ -61,11 +61,7 @@ function M.setup(opts)
 					actions.close(prompt_bufnr)
 					local selection = action_state.get_selected_entry()
 
-					for k, v in pairs(selection) do
-						vim.notify(v .. k, vim.log.levels.INFO)
-					end
-
-					M.play(selection[2])
+					M.play(selection.value)
 				end)
 				return true
 			end,
